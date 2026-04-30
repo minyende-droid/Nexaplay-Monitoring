@@ -21,4 +21,4 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}/prometheus:/etc/prometheus \
             prom/prometheus \
-            promtool check config /etc/prometheus/prometheus.yml
+            /bin/promtool check config /etc/prometheus/prometheus.yml
