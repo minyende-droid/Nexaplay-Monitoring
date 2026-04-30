@@ -1,0 +1,7 @@
+route:
+  receiver: "webhook-receiver"
+
+receivers:
+  - name: "webhook-receiver"
+    webhook_configs:
+      - url: "https://webhook.site/YOUR_WEBHOOK_URL"

@@ -1,0 +1,21 @@
+groups:
+  - name: nexaplay-alerts
+    rules:
+
+      - alert: ServiceDown
+        expr: up{job="nexaplay-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "App service is down"
+          description: "The NexaPlay app has been unreachable for more than 1 minute."
+
+      - alert: HighErrorRate
+        expr: rate(errors_total[1m]) > 0.05
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 5% for more than 1 minute."
