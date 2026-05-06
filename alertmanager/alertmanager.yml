@@ -1,7 +1,15 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'minyendevictor@gmail.com'
+  smtp_auth_username: 'minyendevictor@gmail.com'
+  smtp_auth_password: 'hgmwegasvbbjxsar'
+  smtp_require_tls: true
+
 route:
-  receiver: "webhook-receiver"
+  receiver: 'email-notifications'
 
 receivers:
-  - name: "webhook-receiver"
-    webhook_configs:
-      - url: "https://webhook.site/YOUR_WEBHOOK_URL"
+  - name: 'email-notifications'
+    email_configs:
+      - to: 'minyendevictor@gmail.com'
+        send_resolved: true

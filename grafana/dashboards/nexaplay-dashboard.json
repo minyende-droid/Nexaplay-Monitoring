@@ -2,17 +2,17 @@
   "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
-    "name": "adw2k2v",
+    "name": "ad8n8zp",
     "namespace": "default",
-    "uid": "dc7f8eb4-dd09-48e6-a6c6-00a8db797325",
-    "resourceVersion": "1777554471513985",
+    "uid": "e172dbcf-720b-4452-8ad0-b4962fb73283",
+    "resourceVersion": "1778079593397984",
     "generation": 1,
-    "creationTimestamp": "2026-04-30T13:07:51Z",
+    "creationTimestamp": "2026-05-06T14:59:53Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "700310079930368"
+      "grafana.app/deprecatedInternalID": "2902830900060160"
     },
     "annotations": {
-      "grafana.app/createdBy": "user:bfkn8zy8dfthce",
+      "grafana.app/createdBy": "user:dfl9527qailmob",
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.0.1 (a100054f)"
     }
@@ -65,8 +65,8 @@
                         "name": "PBFA97CFB590B2093"
                       },
                       "spec": {
-                        "editorMode": "builder",
-                        "expr": "rate(http_requests_total[1m])",
+                        "editorMode": "code",
+                        "expr": "sum(rate(http_requests_total[1m]))",
                         "legendFormat": "__auto",
                         "range": true
                       }
@@ -82,25 +82,36 @@
           },
           "vizConfig": {
             "kind": "VizConfig",
-            "group": "timeseries",
+            "group": "gauge",
             "version": "13.0.1",
             "spec": {
               "options": {
-                "annotations": {
-                  "clustering": -1,
-                  "multiLane": false
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
                 },
-                "legend": {
-                  "calcs": [],
-                  "displayMode": "list",
-                  "placement": "bottom",
-                  "showLegend": true
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
+                "orientation": "auto",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
                 },
-                "tooltip": {
-                  "hideZeros": false,
-                  "mode": "single",
-                  "sort": "none"
-                }
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
               },
               "fieldConfig": {
                 "defaults": {
@@ -118,41 +129,7 @@
                     ]
                   },
                   "color": {
-                    "mode": "palette-classic"
-                  },
-                  "custom": {
-                    "axisBorderShow": false,
-                    "axisCenteredZero": false,
-                    "axisColorMode": "text",
-                    "axisLabel": "",
-                    "axisPlacement": "auto",
-                    "barAlignment": 0,
-                    "barWidthFactor": 0.6,
-                    "drawStyle": "line",
-                    "fillOpacity": 0,
-                    "gradientMode": "none",
-                    "hideFrom": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": false
-                    },
-                    "insertNulls": false,
-                    "lineInterpolation": "linear",
-                    "lineWidth": 1,
-                    "pointSize": 5,
-                    "scaleDistribution": {
-                      "type": "linear"
-                    },
-                    "showPoints": "auto",
-                    "showValues": false,
-                    "spanNulls": false,
-                    "stacking": {
-                      "group": "A",
-                      "mode": "none"
-                    },
-                    "thresholdsStyle": {
-                      "mode": "off"
-                    }
+                    "mode": "thresholds"
                   }
                 },
                 "overrides": []
@@ -183,8 +160,8 @@
                         "name": "PBFA97CFB590B2093"
                       },
                       "spec": {
-                        "editorMode": "builder",
-                        "expr": "rate(errors_total[1m])",
+                        "editorMode": "code",
+                        "expr": "(\r\n  sum(rate(http_requests_total{status=~\"5..\"}[1m]))\r\n/\r\n  sum(rate(http_requests_total[1m]))\r\n) * 100",
                         "legendFormat": "__auto",
                         "range": true
                       }
@@ -200,15 +177,21 @@
           },
           "vizConfig": {
             "kind": "VizConfig",
-            "group": "stat",
+            "group": "gauge",
             "version": "13.0.1",
             "spec": {
               "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
+                "barShape": "flat",
+                "barWidthFactor": 0.5,
+                "effects": {
+                  "barGlow": false,
+                  "centerGlow": false,
+                  "gradient": true
+                },
+                "endpointMarker": "point",
+                "minVizHeight": 75,
+                "minVizWidth": 75,
                 "orientation": "auto",
-                "percentChangeColorMode": "standard",
                 "reduceOptions": {
                   "calcs": [
                     "lastNotNull"
@@ -216,9 +199,14 @@
                   "fields": "",
                   "values": false
                 },
-                "showPercentChange": false,
-                "textMode": "auto",
-                "wideLayout": true
+                "segmentCount": 1,
+                "segmentSpacing": 0.3,
+                "shape": "gauge",
+                "showThresholdLabels": false,
+                "showThresholdMarkers": true,
+                "sizing": "auto",
+                "sparkline": true,
+                "textMode": "auto"
               },
               "fieldConfig": {
                 "defaults": {
@@ -249,7 +237,7 @@
         "kind": "Panel",
         "spec": {
           "id": 3,
-          "title": "Active Players",
+          "title": "Avtive Players",
           "description": "",
           "links": [],
           "data": {
@@ -519,7 +507,7 @@
       "hideTimepicker": false,
       "fiscalYearStartMonth": 0
     },
-    "title": "Nexaplay Monitoring Dashboard",
+    "title": "Nexaplay Monitoring",
     "variables": [],
     "preferences": {
       "layout": {
